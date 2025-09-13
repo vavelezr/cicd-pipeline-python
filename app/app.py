@@ -8,7 +8,7 @@ from .calculadora import sumar, restar, multiplicar, dividir
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/sensitive", methods=["GET", "POST"])
 def index():
     """Funcion principal de la app."""
     resultado = None
@@ -37,4 +37,4 @@ def index():
 
 
 if __name__ == "__main__":  # pragma: no cover
-    app.run(debug=True, port=5000, host="0.0.0.0")  # Quita debug=True para producción
+    app.run(debug=False, port=5000, host="0.0.0.0")  # Quita debug=True para producción
