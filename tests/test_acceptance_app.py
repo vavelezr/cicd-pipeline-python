@@ -65,14 +65,15 @@ def find_elements(browser):
 def test_calculadora(browser, num1, num2, operacion, resultado_esperado):
     browser.get(BASE_URL + "/")
 
-    # Encuentra los elementos de la página.  Esta vez con la funcion auxiliar.
     num1_input, num2_input, operacion_select, calcular_button = find_elements(browser)
-
-    #Realiza la operacion:
     num1_input.send_keys(num1)
     num2_input.send_keys(num2)
     operacion_select.select_by_value(operacion)
     calcular_button.click()
 
-    #Verifica con la funcion auxiliar:
-    assert resultado_esperado in get_resultado(browser)
+    WebDriverWait(browser, 10).until(EC.staleness_of(calcular_button))
+
+    h2 = WebDriverWait(browser, 10).until(
+        EC.visibility_of_element_located((By.TAG_NAME, "h2"))
+    )
+    assert resultado_esperado in h2.text
