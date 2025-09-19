@@ -13,9 +13,11 @@ def index_get():
     """Funcion principal de la app."""
     return render_template("index.html")
 
+
 @app.route("/health")
 def health():
     return "OK", 200
+
 
 @app.post("/")
 def index():
