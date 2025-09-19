@@ -1,7 +1,7 @@
 # app/app.py
 """Modulo de app de la calculadora."""
 
-
+import os
 from flask import Flask, render_template, request
 from .calculadora import sumar, restar, multiplicar, dividir
 
@@ -13,6 +13,9 @@ def index_get():
     """Funcion principal de la app."""
     return render_template("index.html")
 
+@app.route("/health")
+def health():
+    return "OK", 200
 
 @app.post("/")
 def index():
@@ -41,4 +44,5 @@ def index():
 
 
 if __name__ == "__main__":  # pragma: no cover
-    app.run(debug=False, port=5000, host="0.0.0.0")  # Quita debug=True para producción
+    app_port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, port=app_port, host="0.0.0.0")
