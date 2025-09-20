@@ -16,6 +16,7 @@ def index_get():
 
 @app.route("/health")
 def health():
+    """Funcion de salud."""
     return "OK", 200
 
 
